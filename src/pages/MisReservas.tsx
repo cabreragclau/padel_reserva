@@ -28,7 +28,7 @@ function MisReservas() {
       .order('date')
       .order('start_time')
       .then(({ data }) => {
-        if (data) setReservations(data as ReservationRow[])
+        if (data) setReservations(data as unknown as ReservationRow[])
         setLoading(false)
       })
   }, [user, authLoading, navigate])
