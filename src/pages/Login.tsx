@@ -31,44 +31,44 @@ function Login() {
 
   return (
     <div className="max-w-sm mx-auto px-6 py-10">
-      <h1 className="text-2xl font-bold text-slate-900 mb-6">
+      <h1 className="font-display font-semibold text-2xl tracking-wide mb-6">
         {mode === 'login' ? 'Iniciar sesión' : 'Crear cuenta'}
       </h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Correo</label>
+          <label className="block text-sm font-medium text-arena-muted mb-1">Correo</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="w-full rounded-md border border-arena-line bg-arena-surface px-3 py-2 text-sm text-arena-text focus:outline-none focus:ring-2 focus:ring-arena-lime/50"
             placeholder="tu@correo.com"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Contraseña</label>
+          <label className="block text-sm font-medium text-arena-muted mb-1">Contraseña</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="w-full rounded-md border border-arena-line bg-arena-surface px-3 py-2 text-sm text-arena-text focus:outline-none focus:ring-2 focus:ring-arena-lime/50"
             placeholder="••••••••"
           />
         </div>
-        {error && <p className="text-sm text-red-600">{error}</p>}
+        {error && <p className="text-sm text-red-400">{error}</p>}
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-emerald-600 text-white rounded-md py-2 font-medium hover:bg-emerald-700 disabled:opacity-50"
+          className="w-full bg-arena-lime text-arena-bg rounded-md py-2 font-display font-medium hover:bg-arena-lime/90 disabled:opacity-50"
         >
           {loading ? 'Cargando...' : mode === 'login' ? 'Entrar' : 'Crear cuenta'}
         </button>
       </form>
       <button
         onClick={() => { setMode(mode === 'login' ? 'register' : 'login'); setError(null) }}
-        className="mt-4 text-sm text-emerald-600 hover:underline"
+        className="mt-4 text-sm text-arena-lime hover:underline"
       >
         {mode === 'login' ? '¿No tienes cuenta? Regístrate' : '¿Ya tienes cuenta? Inicia sesión'}
       </button>

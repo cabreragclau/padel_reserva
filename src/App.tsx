@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import MisReservas from './pages/MisReservas'
 import Admin from './pages/Admin'
+import Tablon from './pages/Tablon'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="mis-reservas" element={<MisReservas />} />
+        <Route path="tablon" element={<Tablon />} />
         <Route path="admin" element={<Admin />} />
       </Route>
     </Routes>

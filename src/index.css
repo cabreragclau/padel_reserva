@@ -1,1 +1,21 @@
 @import "tailwindcss";
+
+@theme {
+  --color-arena-bg: #0B0E0C;
+  --color-arena-surface: #15191A;
+  --color-arena-surface-hover: #1C2120;
+  --color-arena-line: #232927;
+  --color-arena-lime: #D4FF3F;
+  --color-arena-lime-dim: #2A331A;
+  --color-arena-text: #F2F4F0;
+  --color-arena-muted: #8B948C;
+
+  --font-display: "Oswald", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+body {
+  background-color: var(--color-arena-bg);
+  color: var(--color-arena-text);
+  font-family: var(--font-body);
+}

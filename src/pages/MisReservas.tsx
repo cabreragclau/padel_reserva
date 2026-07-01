@@ -40,28 +40,28 @@ function MisReservas() {
 
   if (loading) return (
     <div className="flex items-center justify-center h-64">
-      <p className="text-slate-400">Cargando tus reservas...</p>
+      <p className="text-arena-muted">Cargando tus reservas...</p>
     </div>
   )
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-10">
-      <h1 className="text-2xl font-bold text-slate-900 mb-6">Mis reservas</h1>
+      <h1 className="font-display font-semibold text-2xl tracking-wide mb-6">Mis reservas</h1>
       {reservations.length === 0 ? (
-        <p className="text-slate-500">Todavía no tienes reservas. Ve a Inicio y reserva un horario.</p>
+        <p className="text-arena-muted">Todavía no tienes reservas. Ve a Reservar y elige un horario.</p>
       ) : (
         <div className="space-y-3">
           {reservations.map((r) => (
-            <div key={r.id} className="bg-white rounded-lg border border-slate-200 p-4 flex items-center justify-between">
+            <div key={r.id} className="bg-arena-surface rounded-lg border border-arena-line p-4 flex items-center justify-between">
               <div>
-                <p className="font-semibold text-slate-900">{r.courts.name}</p>
-                <p className="text-sm text-slate-500">
+                <p className="font-display font-medium tracking-wide">{r.courts.name}</p>
+                <p className="text-sm text-arena-muted">
                   {r.date} · {r.start_time.substring(0, 5)} – {r.end_time.substring(0, 5)}
                 </p>
               </div>
               <button
                 onClick={() => handleCancel(r.id)}
-                className="text-sm text-red-500 hover:text-red-700 font-medium"
+                className="text-sm text-red-400 hover:text-red-300 font-medium"
               >
                 Cancelar
               </button>

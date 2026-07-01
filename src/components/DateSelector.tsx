@@ -28,10 +28,10 @@ function DateSelector({ selectedDate, onChange }: DateSelectorProps) {
           <button
             key={iso}
             onClick={() => onChange(iso)}
-            className={`shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+            className={`shrink-0 px-4 py-2 rounded-full text-sm font-medium font-display transition-colors ${
               selectedDate === iso
-                ? 'bg-emerald-600 text-white'
-                : 'bg-white border border-slate-200 text-slate-600 hover:border-emerald-300'
+                ? 'bg-arena-lime text-arena-bg'
+                : 'bg-arena-surface border border-arena-line text-arena-muted hover:text-arena-text'
             }`}
           >
             {label}
@@ -43,7 +43,7 @@ function DateSelector({ selectedDate, onChange }: DateSelectorProps) {
         value={selectedDate}
         min={toLocalISODate(today)}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-3 rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+        className="mt-3 rounded-md border border-arena-line bg-arena-surface px-3 py-2 text-sm text-arena-text focus:outline-none focus:ring-2 focus:ring-arena-lime/50 [color-scheme:dark]"
       />
     </div>
   )
