@@ -14,13 +14,26 @@ interface PlayerPost {
   profiles: { email: string } | null
 }
 
-const LEVELS = ['principiante', 'intermedio', 'avanzado'] as const
+const LEVELS = [
+  '1ra', '2da', '3ra', '4ta', '5ta', '6ta',
+  'Damas D', 'Damas C', 'Damas B', 'Damas A',
+  'Mixtos',
+] as const
+
 type Level = typeof LEVELS[number]
 
 const LEVEL_COLORS: Record<Level, string> = {
-  principiante: 'text-green-400 bg-green-950/40 border-green-900',
-  intermedio: 'text-yellow-400 bg-yellow-950/40 border-yellow-900',
-  avanzado: 'text-red-400 bg-red-950/40 border-red-900',
+  '1ra':     'text-arena-lime bg-arena-lime-dim border-arena-lime/30',
+  '2da':     'text-arena-lime bg-arena-lime-dim border-arena-lime/30',
+  '3ra':     'text-yellow-400 bg-yellow-950/40 border-yellow-900',
+  '4ta':     'text-yellow-400 bg-yellow-950/40 border-yellow-900',
+  '5ta':     'text-orange-400 bg-orange-950/40 border-orange-900',
+  '6ta':     'text-orange-400 bg-orange-950/40 border-orange-900',
+  'Damas D': 'text-pink-400 bg-pink-950/40 border-pink-900',
+  'Damas C': 'text-pink-400 bg-pink-950/40 border-pink-900',
+  'Damas B': 'text-fuchsia-400 bg-fuchsia-950/40 border-fuchsia-900',
+  'Damas A': 'text-fuchsia-400 bg-fuchsia-950/40 border-fuchsia-900',
+  'Mixtos':  'text-sky-400 bg-sky-950/40 border-sky-900',
 }
 
 function getTodayLocal(): string {
@@ -38,16 +51,10 @@ function Tablon() {
   // Form state
   const [formDate, setFormDate] = useState(getTodayLocal())
   const [formTime, setFormTime] = useState('10:00')
-  const [formLevel, setFormLevel] = useState<Level>('intermedio')
+  const [formLevel, setFormLevel] = useState<Level>('3ra')
   const [formMessage, setFormMessage] = useState('')
   const [posting, setPosting] = useState(false)
   const [showForm, setShowForm] = useState(false)
-
-  useEffect(() => {
-    if (authLoading) return
-    if (!user) { navigate('/login'); return }
-    loadPosts(selectedDate)
-  }, [user, authLoading, selectedDate, navigate])
 
   const loadPosts = async (date: string) => {
     setLoading(true)
@@ -59,6 +66,14 @@ function Tablon() {
     if (data) setPosts(data as unknown as PlayerPost[])
     setLoading(false)
   }
+
+  useEffect(() => {
+    if (authLoading) return
+    if (!user) { navigate('/login'); return }
+    loadPosts(selectedDate)
+  }, [user, authLoading, selectedDate, navigate])
+
+  
 
   const handlePost = async () => {
     if (!user) return
@@ -135,13 +150,13 @@ function Tablon() {
               </div>
             </div>
             <div>
-              <label className="block text-xs text-arena-muted uppercase tracking-widest mb-2">Nivel</label>
-              <div className="flex gap-2">
+                <label className="block text-xs text-arena-muted uppercase tracking-widest mb-2">Categoría</label>
+              <div className="flex flex-wrap gap-2">
                 {LEVELS.map((l) => (
                   <button
                     key={l}
                     onClick={() => setFormLevel(l)}
-                    className={`px-3 py-1.5 rounded-md text-sm font-display font-medium border capitalize transition-colors ${
+                    className={`px-3 py-1.5 rounded-md text-sm font-display font-medium border transition-colors ${
                       formLevel === l ? LEVEL_COLORS[l] : 'text-arena-muted border-arena-line hover:text-arena-text'
                     }`}
                   >

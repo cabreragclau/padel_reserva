@@ -7,7 +7,7 @@ function Layout() {
 
   const links = [
     { path: '/', label: 'Reservar' },
-    { path: '/tablon', label: 'Tablón' },
+    { path: '/tablon', label: 'Busca tu Match' },
     { path: '/mis-reservas', label: 'Mis reservas' },
     ...(role === 'admin' ? [{ path: '/admin', label: 'Admin' }] : []),
   ]
