@@ -66,7 +66,7 @@ function CourtScheduleCard({
           <div>
             <p className="text-xs text-arena-muted uppercase tracking-widest mb-2">Duración</p>
             <DurationSelector
-              maxMinutes={activeSlot.maxDurationMinutes}
+              maxMinutes={Math.min(activeSlot.maxDurationMinutes, court.max_duration_minutes)}
               selectedDuration={duration}
               onChange={onDurationChange}
             />
