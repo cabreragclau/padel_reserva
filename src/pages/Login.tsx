@@ -9,7 +9,7 @@ function Login() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
-  const [resentSent, setResentSent] = useState(false)
+  const [resetSent, setResetSent] = useState(false)
   const {signIn, signUp, resetPassword} = useAuth()
 
   const handleSubmit = async (e: React.FormEvent) => {
