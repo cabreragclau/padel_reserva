@@ -18,6 +18,7 @@ body {
   background-color: var(--color-arena-bg);
   color: var(--color-arena-text);
   font-family: var(--font-body);
+}
 
 @keyframes fadeSlideIn {
   from {
@@ -28,6 +29,8 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
 @keyframes slideUp {
   from {
     opacity: 0;
@@ -37,6 +40,4 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
-  }
-}
 }
