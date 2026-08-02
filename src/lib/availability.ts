@@ -4,7 +4,7 @@ import type { Court, TimeSlot } from '../types'
 
 const OPENING_MINUTES = 8 * 60     // 08:00
 const CLOSING_MINUTES = 24 * 60    // 00:00 (medianoche)
-const SLOT_STEP_MINUTES = 60       // un horario de inicio posible cada hora
+const SLOT_STEP_MINUTES = 60       // grilla base cada hora
 const MIN_DURATION_MINUTES = 60    // toda reserva dura al menos 1 hora
 
 interface ExistingReservation {
@@ -37,27 +37,35 @@ export async function fetchCourtsWithAvailability(date: string): Promise<{
       .filter((r) => r.court_id === court.id)
       .map((r) => ({
         start: timeToMinutes(r.start_time.substring(0, 5)),
-        end: timeToMinutes(r.end_time.substring(0, 5)) || CLOSING_MINUTES, // 00:00 -> medianoche
+        end: timeToMinutes(r.end_time.substring(0, 5)) || CLOSING_MINUTES,
       }))
       .sort((a, b) => a.start - b.start)
 
-    const slots: TimeSlot[] = []
-
+    // 1. Grilla base cada hora
+    const candidateStarts = new Set<number>()
     for (
-      let start = OPENING_MINUTES;
-      start <= CLOSING_MINUTES - MIN_DURATION_MINUTES;
-      start += SLOT_STEP_MINUTES
+      let t = OPENING_MINUTES;
+      t <= CLOSING_MINUTES - MIN_DURATION_MINUTES;
+      t += SLOT_STEP_MINUTES
     ) {
+      candidateStarts.add(t)
+    }
+
+    // 2. Sumar el fin exacto de cada reserva existente: elimina los "tiempos muertos"
+    for (const r of courtReservations) {
+      if (r.end >= OPENING_MINUTES && r.end <= CLOSING_MINUTES - MIN_DURATION_MINUTES) {
+        candidateStarts.add(r.end)
+      }
+    }
+
+    const sortedStarts = Array.from(candidateStarts).sort((a, b) => a - b)
+
+    const slots: TimeSlot[] = []
+    for (const start of sortedStarts) {
       const isBlocked = courtReservations.some((r) => start >= r.start && start < r.end)
 
       if (isBlocked) {
-        slots.push({
-          id: `${court.id}-${minutesToTime(start)}`,
-          courtId: court.id,
-          startTime: minutesToTime(start),
-          maxDurationMinutes: 0,
-          isAvailable: false,
-        })
+        // No mostramos horarios de inicio que caen dentro de una reserva existente
         continue
       }
 

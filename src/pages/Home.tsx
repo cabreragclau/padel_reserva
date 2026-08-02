@@ -7,6 +7,7 @@ import CourtScheduleCard from '../components/CourtScheduleCard'
 import DateSelector from '../components/DateSelector'
 import SportFilter from '../components/SportFilter'
 import type { Sport } from '../components/SportFilter'
+import BookingSummaryBar from '../components/BookingSummaryBar'
 import { useAuth } from '../lib/AuthContext'
 import type { Court, TimeSlot } from '../types'
 
@@ -45,7 +46,6 @@ function Home() {
 
   useEffect(() => { loadAvailability(selectedDate) }, [selectedDate])
 
-  // Limpiar selección al cambiar deporte
   const handleSportChange = (sport: Sport) => {
     setSelectedSport(sport)
     setSelected(null)
@@ -98,7 +98,6 @@ function Home() {
     navigate('/mis-reservas')
   }
 
-  // Filtrar canchas por deporte seleccionado
   const filteredCourts = courts.filter((c) => c.sport === selectedSport)
 
   const sportMeta = {
@@ -107,7 +106,7 @@ function Home() {
   }
 
   return (
-    <div className="px-6 py-10">
+    <div className={`px-6 py-10 ${selected ? 'pb-24' : ''}`}>
       <div className="max-w-3xl mx-auto">
         <p className="text-arena-lime text-xs font-medium uppercase tracking-widest mb-2">
           {sportMeta[selectedSport].label}
@@ -140,19 +139,23 @@ function Home() {
                 onSelectSlot={handleSelectSlot}
                 activeSlot={selected?.court.id === court.id ? selected.slot : null}
                 duration={duration}
-                endTime={
-                  selected?.court.id === court.id
-                    ? addMinutesToTime(selected.slot.startTime, duration)
-                    : ''
-                }
-                confirming={confirming}
                 onDurationChange={setDuration}
-                onConfirm={handleConfirm}
               />
             ))}
           </div>
         )}
       </div>
+
+      {selected && (
+        <BookingSummaryBar
+          court={selected.court}
+          slot={selected.slot}
+          date={selectedDate}
+          duration={duration}
+          confirming={confirming}
+          onConfirm={handleConfirm}
+        />
+      )}
     </div>
   )
 }

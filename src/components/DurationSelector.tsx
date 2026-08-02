@@ -15,11 +15,11 @@ function DurationSelector({ maxMinutes, selectedDuration, onChange }: DurationSe
         <button
           key={minutes}
           onClick={() => onChange(minutes)}
-          className={`px-3 py-1.5 rounded-md text-sm font-medium font-display border transition-colors ${
+          className={`px-3 py-1.5 rounded-md text-sm font-medium font-display border transition-all duration-150 ease-out ${
             selectedDuration === minutes
-              ? 'bg-arena-lime text-arena-bg border-arena-lime'
-              : 'bg-arena-bg text-arena-muted border-arena-line hover:text-arena-text'
-          }`}
+              ? 'bg-arena-lime text-arena-bg border-arena-lime scale-105'
+              : 'bg-arena-bg text-arena-muted border-arena-line hover:text-arena-text hover:scale-105 active:scale-95'
+        }`}
         >
           {minutes} min
         </button>
