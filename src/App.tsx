@@ -6,6 +6,7 @@ import MisReservas from './pages/MisReservas'
 import Admin from './pages/Admin'
 import Tablon from './pages/Tablon'
 import ResetPassword from './pages/ResetPassword'
+import AdminCalendar from './pages/AdminCalendar'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="tablon" element={<Tablon />} />
         <Route path="admin" element={<Admin />} />
         <Route path="reset-password" element={<ResetPassword />} />
+        <Route path="admin/calendario" element={<AdminCalendar />} />
       </Route>
     </Routes>
   )

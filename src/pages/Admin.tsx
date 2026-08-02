@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 import { useAuth } from '../lib/AuthContext'
 import DateSelector from '../components/DateSelector'
@@ -50,6 +50,7 @@ function Admin() {
   return (
     <div className="max-w-3xl mx-auto px-6 py-10">
       <h1 className="font-display font-semibold text-2xl tracking-wide mb-1">Panel de administrador</h1>
+      <Link to="/admin/calendario" className="text-sm text-arena-lime hover:underline">Ver calendario →</Link>
       <p className="text-arena-muted mb-6">Todas las reservas del club por día</p>
 
       <DateSelector selectedDate={selectedDate} onChange={setSelectedDate} />
